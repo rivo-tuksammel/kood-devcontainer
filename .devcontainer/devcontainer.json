@@ -24,7 +24,7 @@
 				"ms-vsliveshare.vsliveshare",
 				"VisualStudioExptTeam.vscodeintellicode",
 				"bradlc.vscode-tailwindcss",
-				"unifiedjs.vscode-mdx",
+				"unifiedjs.vscode-mdx"
 			]
 		}
 	},

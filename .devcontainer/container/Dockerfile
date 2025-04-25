@@ -56,11 +56,6 @@ RUN set -e && \
     chmod 0440 "/etc/sudoers.d/$USERNAME"
 
 
-# Set user password.
-# RUN if [[ -n "$USER_PASSWORD" ]]; then \
-#         echo "$USERNAME:$USER_PASSWORD" | chpasswd; \
-#     fi
-
 # Set NVM install Directory.
 RUN mkdir -p /usr/local/nvm
 ENV NVM_DIR=/usr/local/nvm
