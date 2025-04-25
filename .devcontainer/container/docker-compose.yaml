@@ -1,0 +1,14 @@
+---
+services:
+  devcontainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        USER_UID: $HOST_UID
+        USER_GID: $HOST_GID
+        USERNAME: $HOST_USERNAME 
+    pull_policy: always
+    command: sleep infinity
+    volumes:
+      - ../..:/workspace:cached
