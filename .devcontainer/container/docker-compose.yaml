@@ -9,6 +9,8 @@ services:
         USER_GID: $HOST_GID
         USERNAME: $HOST_USERNAME 
     pull_policy: always
+    env_file:
+      - ../.env
     command: sleep infinity
     volumes:
       - ../..:/workspace:cached
