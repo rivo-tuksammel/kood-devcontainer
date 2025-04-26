@@ -26,6 +26,11 @@ RUN apt-get update && apt-get install -y \
     sudo 
 
 
+# Install Java 21 and Maven    
+RUN apt-get install -y \
+    openjdk-21-jdk \
+    maven 
+
 # Install ngrok
 RUN curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
   | tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
@@ -70,8 +75,13 @@ RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.40.3/install.sh | b
     && nvm alias default $NODE_VERSION \
     && nvm use default
 
-# Add Node and NPM to PATH.
+# Add Node to PATH.
 ENV NODE_PATH=$NVM_DIR/versions/node/v$NODE_VERSION/lib/node_modules
 ENV PATH=$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
+# Add NVM to global bashrc.
+RUN echo 'export NVM_DIR=/usr/local/nvm' >> /etc/bash.bashrc && \
+echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> /etc/bash.bashrc
+
+# Create Symlink to workspace in users home directory.
 RUN ln -s /workspace "/home/${USERNAME}/workspace" 
