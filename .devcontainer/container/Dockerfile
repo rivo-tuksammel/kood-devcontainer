@@ -23,7 +23,12 @@ RUN apt-get update && apt-get install -y \
     software-properties-common \
     iputils-ping \
     dnsutils \
-    sudo 
+    sudo \
+    vim \
+    tmux \
+    net-tools \
+    neofetch
+
 
 
 # Install Java 21 and Maven    
