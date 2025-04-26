@@ -8,6 +8,7 @@
 	"shutdownAction": "stopCompose",
     "workspaceFolder": "/workspace/",
 	"initializeCommand": "bash .devcontainer/scripts/host/init.sh",
+	"postCreateCommand": "sudo chown root:docker /var/run/docker.sock",
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
