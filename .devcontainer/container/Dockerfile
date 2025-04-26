@@ -29,8 +29,6 @@ RUN apt-get update && apt-get install -y \
     net-tools \
     neofetch
 
-
-
 # Install Java 21 and Maven    
 RUN apt-get install -y \
     openjdk-21-jdk \

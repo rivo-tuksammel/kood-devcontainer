@@ -24,7 +24,10 @@
 				"ms-vsliveshare.vsliveshare",
 				"VisualStudioExptTeam.vscodeintellicode",
 				"bradlc.vscode-tailwindcss",
-				"unifiedjs.vscode-mdx"
+				"unifiedjs.vscode-mdx",
+				"vscjava.vscode-java-pack",
+				"Oracle.oracle-java",
+				"vmware.vscode-spring-boot"
 			]
 		}
 	},
