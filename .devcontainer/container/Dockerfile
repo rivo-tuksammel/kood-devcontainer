@@ -88,5 +88,8 @@ ENV PATH=$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 RUN echo 'export NVM_DIR=/usr/local/nvm' >> /etc/bash.bashrc && \
 echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> /etc/bash.bashrc
 
+# Rice the terminal with neofetch.
+RUN echo 'neofetch --jp2a /workspace/.devcontainer/assets/logo-square.png --colors 3 3 3 7 7' >> /etc/bash.bashrc
+
 # Create Symlink to workspace in users home directory.
 RUN ln -s /workspace "/home/${USERNAME}/workspace" 
