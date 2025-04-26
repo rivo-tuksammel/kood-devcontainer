@@ -2,3 +2,4 @@
 
 # This script is used to extract the host user information (UID, GID, and username)
 bash .devcontainer/scripts/host/extract-env.sh
+bash .devcontainer/scripts/host/set-docker-permissions.sh

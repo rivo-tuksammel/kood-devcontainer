@@ -27,7 +27,8 @@
 				"unifiedjs.vscode-mdx",
 				"vscjava.vscode-java-pack",
 				"Oracle.oracle-java",
-				"vmware.vscode-spring-boot"
+				"vmware.vscode-spring-boot",
+				"ms-azuretools.vscode-docker"
 			]
 		}
 	},
