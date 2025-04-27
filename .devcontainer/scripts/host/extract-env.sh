@@ -12,7 +12,6 @@ ENV_DIR=".devcontainer/container"
 ENV_PATH="$ENV_DIR/$ENV_FILE"
 
 
-
 echo "Extracting host information..."
 echo "Host User Information:"
 echo "Host User: $HOST_USERNAME"
@@ -30,6 +29,5 @@ echo "HOST_USERNAME=$HOST_USERNAME" >> ${ENV_PATH}
 echo "HOST_UID=$HOST_UID" >> ${ENV_PATH}
 echo "HOST_GID=$HOST_GID" >> ${ENV_PATH}
 echo "HOST_DOCKER_GID=$HOST_DOCKER_GID" >> ${ENV_PATH}
-
 
 echo "Environment variables set up successfully."

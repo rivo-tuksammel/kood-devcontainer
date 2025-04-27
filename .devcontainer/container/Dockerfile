@@ -1,4 +1,3 @@
-# Run privileged build to configure container.
 FROM ubuntu:latest
 
 ARG USER_UID
@@ -6,9 +5,10 @@ ARG USER_GID
 ARG DOCKER_GID
 ENV USERNAME=kood
 
-# Replace default shell with bash so we can source files
+# Replace default shell with bash so we can source files in the build process.
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
+# Set root password to root.
 RUN echo "root:root" | chpasswd
 
 # Update and install some basic tools.
@@ -30,12 +30,12 @@ RUN apt-get update && apt-get install -y \
     net-tools \
     neofetch
 
-# Install Java 21 and Maven    
+# Install Java 21 and Maven.
 RUN apt-get install -y \
     openjdk-21-jdk \
     maven 
 
-# Install ngrok
+# Install ngrok.
 RUN curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
   | tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
   && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" \
@@ -43,22 +43,20 @@ RUN curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
   && apt update \
   && apt install ngrok
 
-
-# Add Docker's official GPG key:
+# Add Docker's official GPG key.
 RUN apt-get update && \
 apt-get install -y ca-certificates curl && \
 install -m 0755 -d /etc/apt/keyrings && \
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc && \
 chmod a+r /etc/apt/keyrings/docker.asc
 
-# Add Docker's repository to Apt sources:
+# Add Docker's repository to Apt sources.
 RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
 $(. /etc/os-release && echo ${UBUNTU_CODENAME:-$VERSION_CODENAME}) stable" > /etc/apt/sources.list.d/docker.list && \
 apt-get update
 
-# Install CLI, Compose and Buildx, Engine is already exposed from the host by volume mount.:
+# Install CLI, Compose and Buildx, Engine is already exposed from the host by using a volume mount in compose.
 RUN apt-get install -y docker-ce-cli docker-compose-plugin docker-buildx-plugin containerd.io
-
 
 # Set NVM install Directory.
 RUN mkdir -p /usr/local/nvm
@@ -85,7 +83,6 @@ echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> /etc/bash.bashrc
 # Rice the terminal with neofetch.
 RUN echo 'neofetch --jp2a /workspace/.devcontainer/assets/logo-square.png --colors 3 3 3 7 7' >> /etc/bash.bashrc
 
-
 # Create a user matching host system.
 RUN set -e && \
     if [[ -z "$USER_UID" || -z "$USER_GID" || -z "$USERNAME" ]]; then \
@@ -106,11 +103,9 @@ RUN set -e && \
     echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > "/etc/sudoers.d/$USERNAME" && \
     chmod 0440 "/etc/sudoers.d/$USERNAME"
 
-
 # Add user to docker group.
 RUN groupadd -g ${DOCKER_GID} docker && \
 usermod -aG docker "${USERNAME}"
 
-
-# Create Symlink to workspace in users home directory.
+# Create symlink to workspace in users home directory.
 RUN ln -s /workspace "/home/${USERNAME}/workspace" 
